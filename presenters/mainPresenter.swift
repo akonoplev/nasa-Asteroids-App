@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import UIKit
 
 class mainPresenter {
-    var view: mainVC!
+    weak var view: mainVC!
 }
 
 extension mainPresenter {
@@ -42,13 +41,4 @@ extension mainPresenter {
     }
 }
 
-//MARK: - remove all subview unless earth, searchButton and dataPicker
-extension mainPresenter {
-    func removeSubviews(subviews: [UIView]) {
-        for subview in subviews {
-            if subview.tag < 200 {
-                subview.removeFromSuperview()
-            }
-        }
-    }
-}
+

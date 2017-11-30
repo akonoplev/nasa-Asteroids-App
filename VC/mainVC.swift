@@ -38,7 +38,7 @@ extension mainVC {
     @IBAction func tapSearch(_ sender: Any) {
         self.presenter.formDate()
         self.presenter.getAsteroids()
-        presenter.removeSubviews(subviews: self.view.subviews)
+        self.removeSubviews(subviews: self.view.subviews)
         GradientAndStarsLayer.configureStarsLayer(view: self.view, shapeLayer: starsLayer)
     }
 }
@@ -136,9 +136,6 @@ extension mainVC {
             let width = UIScreen.main.bounds.width / 2.7
             let height = UIScreen.main.bounds.height / 4
             let xCoord = selectedAsteroid.frame.midX - width / 1.3
-        
-            
-            
             
             infoView = InfoView(frame: CGRect(x: xCoord, y: yCoord, width: width, height: height))
             infoView.nameLabel.text = "Название: \(asteroidArray[selectedAsteroid.tag].name)"
@@ -154,7 +151,7 @@ extension mainVC {
             })
             
         } else if tapGestureRecognaizer.state == .ended {
-            self.presenter.removeSubviews(subviews: [infoView])
+            self.removeSubviews(subviews: [infoView])
             selectedAsteroid.layer.borderWidth = 0
         }
     }
@@ -179,3 +176,15 @@ extension mainVC {
         view.layer.insertSublayer(gradientLayer, at: 0)
     }
 }
+
+//MARK: - remove all subview unless earth, searchButton and dataPicker
+extension mainVC {
+    func removeSubviews(subviews: [UIView]) {
+        for subview in subviews {
+            if subview.tag < 200 {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+}
+
